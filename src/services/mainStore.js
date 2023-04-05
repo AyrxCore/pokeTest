@@ -1,9 +1,14 @@
 const state = () => ({
-    pokemons: [
+    savedPokemons: [
         {
+            id: 132,
             name: 'ditto',
             weight: 40,
             height: 3,
+            sprites: {
+                front_default:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png",
+                front_shiny:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/132.png"
+            },
             types: [
                 {
                     type: {
@@ -55,7 +60,11 @@ const state = () => ({
 
 const mutations = {
     addPokemon(state, newPokemon) {
-        state.pokemon.push(newPokemon)
+        state.savedPokemons.push(newPokemon)
+    },
+    removePokemon(state, pokemonId) {
+        let index = state.savedPokemons.findIndex((x) => x.id === pokemonId);
+        state.savedPokemons.splice(index, 1);
     }
 }
 

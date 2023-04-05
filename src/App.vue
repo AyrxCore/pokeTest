@@ -19,10 +19,15 @@
                     @input="getPokemon(model?.name)"
                 ></v-autocomplete>
             </div>
-            <PokemonFile
-                v-if="pokemon !== null"
-                :pokemon="pokemon"
-            />
+            <div class="d-flex flex-wrap">
+                <PokemonFile
+                    v-for="(pokemon, key) in savedPokemons"
+                    :key="key"
+                    :pokemon="pokemon"
+                    class="ml-4 mb-4"
+                />
+            </div>
+
         </v-app>
     </div>
 
@@ -33,6 +38,7 @@
 import PokemonFile from './components/PokemonFile.vue'
 import apiRequester from "@/services/apiRequester";
 import _debounce from "lodash/debounce";
+import {forEach} from "lodash";
 
 export default {
     name: 'App',
@@ -47,12 +53,20 @@ export default {
         pokemon: null
     }),
     computed: {
-        items () {
-            return this.pokemons;
+        items() {
+            const savedPokemonsNames = this.savedPokemons.map(savedPokemon => {
+                return savedPokemon.name;
+            });
+            return this.pokemons.filter(pokemon => {
+                return savedPokemonsNames.findIndex((x) => x === pokemon.name) === -1
+            });
         },
+        savedPokemons() {
+            return this.$store.state.mainStore.savedPokemons;
+        }
     },
     watch: {
-        async search (val) {
+        async search(val) {
             // // Items have already been loaded
             // if (this.items.length > 0) return
 
@@ -75,13 +89,12 @@ export default {
                 await apiRequester.getPokemon(pokemonName)
                     .then(res => res.json())
                     .then(res => {
-                        console.log(res)
-                        this.pokemon = res
+                        this.$store.commit('addPokemon', res);
                     })
                     .finally(() => (this.isLoading = false));
             }
         }
-    }
+    },
 }
 </script>
 

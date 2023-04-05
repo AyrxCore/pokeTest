@@ -7,6 +7,17 @@
             min-height="300px"
             style="position: relative"
         >
+            <v-btn
+                class="mr-4"
+                style="position: absolute; right: 0;"
+                icon
+                @click="removePokemon(pokemon)"
+                color="red"
+            >
+                <v-icon>
+                    mdi-close
+                </v-icon>
+            </v-btn>
             <v-skeleton-loader
                 v-if="isEmptyPokemon"
                 type="list-item-avatar, table-heading@4"
@@ -87,6 +98,9 @@ export default {
         firstLetterUppercase(string) {
             return string?.charAt(0).toUpperCase() + string?.slice(1);
         },
+        removePokemon(pokemon) {
+            this.$store.commit('removePokemon', pokemon.id);
+        }
     },
     computed: {
         frontDefaultImg() {
