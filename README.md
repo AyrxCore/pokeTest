@@ -1,24 +1,13 @@
-# hello-world
+# PokeTest
 
-## Project setup
-```
-npm install
-```
+A light Pokedex powered by pokeapi.co
 
-### Compiles and hot-reloads for development
+## Launch server
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Watch hot-reload
 ```
-npm run build
+npm run watch
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
