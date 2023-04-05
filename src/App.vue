@@ -2,7 +2,10 @@
 
     <div id="app">
         <v-app>
-            <div>
+            <div
+                class="mx-auto"
+                style="width: 80%"
+            >
                 <v-autocomplete
                     v-model="model"
                     :items="items"
@@ -17,9 +20,10 @@
                     prepend-icon="mdi-database-search"
                     return-object
                     @input="getPokemon(model?.name)"
+                    clearable
                 ></v-autocomplete>
             </div>
-            <div class="d-flex flex-wrap">
+            <div class="d-flex flex-wrap justify-center">
                 <PokemonFile
                     v-for="(pokemon, key) in savedPokemons"
                     :key="key"
