@@ -40,7 +40,7 @@
                     </v-row>
                     <v-row>
                         <v-col class="d-flex align-center justify-center">
-                            <div>{{ name }}</div>
+                            <div class="text-h4 font-weight-bold">{{ name }}</div>
                         </v-col>
                     </v-row>
                 </v-card-title>

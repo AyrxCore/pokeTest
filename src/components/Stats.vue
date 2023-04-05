@@ -8,12 +8,14 @@
             style="width: 60px"
         >
             <v-progress-circular
-                :value="stat.base_stat"
+                :value="statPercentile(stat.base_stat)"
                 :color="statColor(stat.base_stat)"
                 :rotate="-90"
                 :size="50"
                 :width="7"
-            ></v-progress-circular>
+            >
+                {{ stat.base_stat }}
+            </v-progress-circular>
             <div class="caption text-center">{{ statNameUppercase(stat.stat.name) }}</div>
         </div>
 
@@ -47,13 +49,16 @@ export default {
             return statName.charAt(0).toUpperCase() + statName.slice(1);
         },
         statColor(baseStat) {
-            if(baseStat <= 30) {
+            if(baseStat <= 50) {
                 return 'red';
-            } else if(baseStat > 30 && baseStat < 70) {
+            } else if(baseStat > 50 && baseStat < 100) {
                 return "orange";
             } else {
                 return "green";
             }
+        },
+        statPercentile(baseStat) {
+            return baseStat*100/255;
         }
     }
 }
